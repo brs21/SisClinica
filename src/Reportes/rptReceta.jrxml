@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptReceta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="560c01e9-595c-4502-bf0a-6b8033acb3e2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="11"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idpersona" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="receta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     persona.`nombre` AS persona_nombre,
+     persona.`apellido` AS persona_apellido,
+     persona.`numero_documento` AS persona_numero_documento,
+     persona.`idpersona` AS persona_idpersona,
+     consulta.`fecha_consulta` AS consulta_fecha_consulta,
+     consulta.`idcliente` AS consulta_idcliente
+FROM
+     `cliente` cliente INNER JOIN `consulta` consulta ON cliente.`idpersona` = consulta.`idcliente`
+     INNER JOIN `persona` persona ON cliente.`idpersona` = persona.`idpersona`
+where consulta.`idcliente` =$P{idpersona}]]>
+	</queryString>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_apellido" class="java.lang.String"/>
+	<field name="persona_numero_documento" class="java.lang.String"/>
+	<field name="persona_idpersona" class="java.lang.Integer"/>
+	<field name="consulta_fecha_consulta" class="java.sql.Date"/>
+	<field name="consulta_idcliente" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="21" y="0" width="66" height="79" uuid="30379005-451e-45e6-867d-61ab635bf862"/>
+				<imageExpression><![CDATA["C:\\Users\\Boris\\Documents\\NetBeansProjects\\SisClinica\\src\\File\\medicina.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="207" y="0" width="254" height="79" uuid="74a5b252-e7ee-4683-8918-55740e300217"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLINICA Dr. Orellana]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="20" uuid="c59f12d8-0a3c-4753-a183-df6b3d6def2b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sr. Sra.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="0" width="56" height="20" uuid="a3b4f9f1-c517-4177-9430-35857056f44c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="0" width="65" height="20" uuid="1b1443e6-6c82-408a-9216-f7370294c305"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_apellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="0" width="100" height="20" uuid="8b5df612-03b1-4ff8-b57e-63a3308cff57"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="0" width="100" height="20" uuid="f662d2e2-c598-456c-829b-5051988b8414"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_numero_documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="182" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="646" height="182" uuid="399d02a6-faee-442e-83f0-cffb15e5d2c4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="9" y="0" width="637" height="182" uuid="f537e63a-612e-4fde-a9b2-08f503d3809d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{receta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>
